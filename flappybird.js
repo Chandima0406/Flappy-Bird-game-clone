@@ -35,6 +35,7 @@ let velocityY = 0; //bird jump speed
 let gravity = 0.4;
 
 let gameOver = false;
+let score = 0;
 
 
 window.onload = function() {
@@ -79,16 +80,30 @@ function update() {
     bird.y += velocityY;
     context.drawImage(birding, bird.x, bird.y, bird.width, bird.height);
 
+    if (bird.y > board.height) {
+        gameOver = true;
+    }
+
     //pipes
     for (let i = 0; i < pipeArray.length; i++) {
     let pipe = pipeArray[i];
     pipe.x += velocityX;
     context.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
 
+    if (!pipe.passed && bird.x > pipe.x + pipe.width) {
+        score += 1;
+        pipe.passed = true;
+    }
+
     if (detectCollision(bird, pipe)) {
         gameOver = true;
     }
-}
+    }
+
+    //score
+    context.fillStyle = "white";
+    context.font = "45px sans-serif";
+    context.fillText(score, 5, 45);
 }
 
 function placePipes() {
