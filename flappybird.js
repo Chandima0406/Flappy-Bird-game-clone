@@ -32,6 +32,7 @@ let bottomPipeImg;
 //physics
 let velocityX = -2; //pipes moving left speed
 let velocityY = 0; //bird jump speed
+let gravity = 0.4;
 
 window.onload = function() {
     board = document.getElementById("board");
@@ -65,7 +66,9 @@ function update() {
     requestAnimationFrame(update);
     context.clearRect(0, 0, board.width, board.height);
 
-    //bird
+   //bird
+    velocityY += gravity;
+    bird.y += velocityY;
     context.drawImage(birding, bird.x, bird.y, bird.width, bird.height);
 
     //pipes
