@@ -91,7 +91,7 @@ function update() {
     context.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
 
     if (!pipe.passed && bird.x > pipe.x + pipe.width) {
-        score += 1;
+        score += 0.5;
         pipe.passed = true;
     }
 
